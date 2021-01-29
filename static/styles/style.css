@@ -1,0 +1,18 @@
+html * {
+    font-family: Arial, Helvetica, sans-serif;
+    max-width: 1000px;
+    margin:0 auto;
+    text-align: center;
+}
+
+#output {
+    padding-top:10px;
+    display: inline-block;
+}
+
+form {
+    position: relative;
+    padding: 1.5rem;
+    margin: auto;
+    border: solid #f7f7f9;
+}

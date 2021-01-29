@@ -1,0 +1,90 @@
+<html>
+      <head>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+            <link rel= "stylesheet"
+                  type= "text/css"
+                  href="{{url_for('static',
+                        filename=
+                        'styles/style.css')}}">
+      </head>
+      <body>
+            <h1>Fitness App</h1>
+            <div class="row">
+                  <form class="form col-md-6" method="POST">
+                        <h2>Inputs</h2>
+                        <div class="form-group row">
+                              <label for="feet" class="col-sm-2 col-form-label">Feet</label>
+                              <input class="form-control col-sm-10"
+                                    type="number"
+                                    name="feet"
+                                    step="1"
+                                    min="0"
+                                    placeholder="Feet"
+                                    required
+                                    >
+                        </div>
+                        <div class="form-group row">
+                              <label for="inches" class="col-sm-2 col-form-label">Inches</label>
+                              <input class="form-control col-sm-10"
+                                    type="number"
+                                    name="inches"
+                                    step="1"
+                                    min="0"
+                                    placeholder="Inches"
+                                    required
+                                    >
+                        </div>
+                        <div class="form-group row">
+                              <label for="weight" class="col-sm-2 col-form-label">Weight (lbs)</label>
+                              <input class="form-control col-sm-10"
+                                    type="number"
+                                    name="weight"
+                                    step="5"
+                                    min="0"
+                                    placeholder="Lbs"
+                                    required
+                                    >
+                        </div>
+                        <div class="form-group row">
+                              <label for="set">What type of exercise set are you looking for?</label>
+                              <select name="set" id="set" class="selectpicker form-control">
+                                    <option selected>Choose...</option>
+                                    {% for i in range(0, sets_len)%}
+                                          <option value="{{ i }}">{{ sets[i].name }}</option>
+                                    {% endfor %}
+                              </select>
+                        </div>
+                        <div class="form-group row">
+                              <label for="goal">What is your exercise goal?</label>
+                              <select name="goal" id="goal" class="selectpicker form-control">
+                                    <option selected>Choose...</option>
+                                    {% for i in range(0, goals_len)%}
+                                          <option value="{{ i }}">{{ goals[i].name }}</option>
+                                    {% endfor %}
+                              </select>
+                        </div>
+                        <input class="btn btn-primary"
+                              type="submit"
+                              value="Calculate">
+                  </form>
+                  <section class="col-md-6">
+                        <h2>Result</h2>
+                        {% if output_set %}
+                              <h3>Here's your exercise set!</h3>
+                              {% for i in output_set %}
+                                    <div class="card">
+                                          <div class="card-body">
+                                                <h5 class="card-title">{{ i['name'] }}</h5>
+                                                <p class="card-text">{{ i['desc'] }}</p>
+                                          </div>
+                                          <div class="card-footer">{{ i['equipment'] }}</div>
+                                    </div>
+                              {% endfor %}
+                              <p>If you have any questions, please see our sponsor Arnold Schwarznegger.</p>
+                        {% else %}
+                              <p>Your result will appear here. Enter your inputs to see your workout set!</p>
+                        {% endif %}
+                  </section>
+            </div>
+      </body>
+</html>
